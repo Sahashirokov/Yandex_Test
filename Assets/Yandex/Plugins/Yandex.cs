@@ -19,17 +19,45 @@ public class Yandex : MonoBehaviour
 
     [DllImport("__Internal")]
     private static extern void Rategame();
+    
+    
 
     [SerializeField] TextMeshProUGUI _nameText;
     [SerializeField] RawImage _photo;
     [SerializeField] GameObject _Objphoto;
-   
+    [SerializeField]  TextMeshProUGUI _textrate;
+    
 
     public void RateGameButton()
     {
         Rategame();
     }
 
+    public void proverkaRate(string twoobj)
+    {
+        if (twoobj == "lite")
+        {
+            _textrate.text = "Войти,для оценки";
+            _textrate.fontSize = 30;
+            //authtext.text = authtext.text;
+        }
+        
+    }
+
+    public void conncetRate(bool okobj)
+    {
+        if (okobj == true)
+        {
+            
+           _textrate.text = " уже оценили игру";
+            _textrate.fontSize = 30; 
+            
+        }else 
+        {
+            _textrate.text = "неавторизованы";
+            _textrate.fontSize = 30;
+        }
+    }
 
 
     public void HelloButtin()
@@ -59,6 +87,8 @@ public class Yandex : MonoBehaviour
         else
             _photo.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
     }
+    
+    
 
 
 

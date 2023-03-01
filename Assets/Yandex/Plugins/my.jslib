@@ -16,17 +16,38 @@ GiveMePlayerData: function () {
 
 
 Rategame: function () {
-    ysdk.feedback.canReview()
+
+
+    var pleobg = player.getMode();
+    var sentq=false;
+            if(pleobg === 'lite'){
+                butauth();
+                myGameInstance.SendMessage('Yandex', 'proverkaRate', pleobg);
+            }else{
+
+                ysdk.feedback.canReview()
         .then(({ value, reason }) => {
             if (value) {
                 ysdk.feedback.requestReview()
                     .then(({ feedbackSent }) => {
+                        sentq=true;
+                        myGameInstance.SendMessage('Yandex', 'conncetRate', sentq);
                         console.log(feedbackSent);
+
+
                     })
             } else {
                 console.log(reason)
             }
         })
+
+
+          }
+
+
+
+
+
   },
 
 SaveExtern: function(date) {
@@ -50,10 +71,76 @@ SetToLeaderboard: function(value){
     lb.setLeaderboardScore('Height', value);
 
   });
+},
 
+GetLang : function(){
+    var lang =  ysdk.environment.i18n.lang;
+    var bufferSize = lengthBytesUTF8(lang)+1;
+    var buffer = _malloc(bufferSize);
+    stringToUTF8(lang,buffer,bufferSize);
+    return buffer;
+},
+
+ShowAdv : function()
+    {
+
+ysdk.adv.showFullscreenAdv({
+    callbacks: {
+        onClose: function(wasShown) {
+            console.log("------------------------closed---------------")
+          // some action after close
+        },
+        onError: function(error) {
+          // some action on error
+        }
+    }
+})
 
 },
 
+    AutchPlayer: function(){
+
+//ysdk.auth.openAuthDialog();
 
 
+            var pleobg = player.getMode();
+            if(pleobg === 'lite'){
+                butauth();
+                myGameInstance.SendMessage('YandexAuth', 'SetButton', pleobg);
+            }else{
+                  myGameInstance.SendMessage('YandexAuth', 'SetButton', pleobg);
+            }
+
+
+
+
+            //myGameInstance.SendMessage('YandexAuth', 'SetButton', pleobg);
+
+
+
+    },
+
+
+
+   AddCoinExtern : function(value){
+       ysdk.adv.showRewardedVideo({
+    callbacks: {
+        onOpen: () => {
+          console.log('Video ad open.');
+        },
+        onRewarded: () => {
+          console.log('Rewarded!');
+            myGameInstance.SendMessage("CoinManager","AddCoins",value);
+        },
+        onClose: () => {
+          console.log('Video ad closed.');
+        },
+        onError: (e) => {
+          console.log('Error while open video ad:', e);
+        }
+    }
+})
+   }
 });
+
+

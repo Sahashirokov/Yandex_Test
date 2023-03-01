@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 7260151790082115561}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.313, y: -4.833, z: -0.026}
 --- !u!114 &7154958579652677266
 MonoBehaviour:
@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotatespeed: 360
   _effectprefab: {fileID: 1845240806346120, guid: b395d5d6eb4b4b846acc021ee036b744,
+    type: 3}
+  _CoinSound: {fileID: 4701501131341042985, guid: dbc72c89dc9438f408e4ab1f5771adef,
     type: 3}
 --- !u!135 &7154958579652677267
 SphereCollider:

@@ -20,9 +20,9 @@ public class Shop : MonoBehaviour
     }
     public void BuyWidth()
     {
-        if(_coinManager.NumberOfCoins >= 100)
+        if(_coinManager.NumberOfCoins >= 200)
         {
-            _coinManager.SpendMoney(100);
+            _coinManager.SpendMoney(200);
             Progress.Instance.PlayerInfo.Coins = _coinManager.NumberOfCoins;
             Progress.Instance.PlayerInfo.Width += 25;
             _playermodifer.SetWidtch(Progress.Instance.PlayerInfo.Width);
@@ -31,9 +31,9 @@ public class Shop : MonoBehaviour
     }
     public void BuyHeight()
     {
-        if (_coinManager.NumberOfCoins >= 100)
+        if (_coinManager.NumberOfCoins >= 200)
         {
-            _coinManager.SpendMoney(100);
+            _coinManager.SpendMoney(200);
             Progress.Instance.PlayerInfo.Coins = _coinManager.NumberOfCoins;
             Progress.Instance.PlayerInfo.Height += 25;
 

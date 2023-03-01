@@ -16,7 +16,10 @@ public class Playermodifer : MonoBehaviour
 
 
     [SerializeField] AudioSource _increaseSound;
+    [SerializeField] GameObject _increaseObject;
     [SerializeField] AudioSource _blowSound;
+    [SerializeField] GameObject _blowObject;
+    //[SerializeField]  AudioSource _stopA;
 
     public void Start()
     {
@@ -45,6 +48,8 @@ public class Playermodifer : MonoBehaviour
     }
     public void AddWidtch(int value)
     {
+       // _increaseObject.SetActive(true);
+        //_blowObject.SetActive(true);
         _widtch += value ;
         UpdateWidtch();
         if(value > 0)
@@ -84,6 +89,7 @@ public class Playermodifer : MonoBehaviour
 
     public void HitBarrier()
     {
+        
         if(_height > 0)
         {
             _height -= 50;
@@ -105,7 +111,18 @@ public class Playermodifer : MonoBehaviour
     }
     void Die()
     {
+        _increaseObject.SetActive(false);
+        _blowObject.SetActive(false);
+        FindObjectOfType<FinishTrigger>().Brik();
+        FindObjectOfType<PlayerBehaviaer>().SoundRun();
+       // _stopA.Stop();
         FindObjectOfType<GameManager>().ShowFinishWindow();
         Destroy(gameObject);
+    }
+
+     public void Tgfinish()
+    {
+        Destroy(_increaseObject);
+        Destroy(_blowObject);
     }
 }

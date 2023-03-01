@@ -8,15 +8,21 @@ public class PlayerBehaviaer : MonoBehaviour
     [SerializeField] PreFinishBeheviour _preFinishBeheviour;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _stopSound;
-    [SerializeField] AudioSource _FinishSound;
-    [SerializeField] AudioSource _BackSound;
+    [SerializeField] GameObject _stopObject;
+    [SerializeField]  AudioSource _CoinSound;
+    [SerializeField]  GameObject _CoinD;
+    //[SerializeField] AudioSource _FinishSound;
+    
     void Start()
     {
+        
         _PlayerMove.enabled = false;
         _preFinishBeheviour.enabled = false;
     }
    public void Play()
     {
+       // _CoinD.SetActive(true);
+        //_stopObject.SetActive(true);
         _PlayerMove.enabled = true;
     }
     public void StartPreFinishTrigger()
@@ -29,12 +35,12 @@ public class PlayerBehaviaer : MonoBehaviour
         _preFinishBeheviour.enabled = false;
         _animator.SetTrigger("Dance");
         _stopSound.Stop();
-        _FinishSound.Play();
+       // _FinishSound.Play();
     }
 
     bool isPaused = false;
 
-    void OnGUI()
+    /*void OnGUI()
     {
         if (isPaused)
         {
@@ -49,7 +55,7 @@ public class PlayerBehaviaer : MonoBehaviour
             }
             
         
-    }
+    }*/
 
     void OnApplicationFocus(bool hasFocus)
     {
@@ -59,5 +65,16 @@ public class PlayerBehaviaer : MonoBehaviour
     void OnApplicationPause(bool pauseStatus)
     {
         isPaused = pauseStatus;
+    }
+
+    public void SoundRun()
+    {
+        Destroy(_stopObject);
+        Destroy(_CoinD);
+    }
+
+    public void Dcoin()
+    {
+        _CoinSound.Play();
     }
 }
